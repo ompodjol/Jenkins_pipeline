@@ -25,13 +25,15 @@ pipeline {
             }
         }
 
-        stage('Deploy to Staging') {
-            when {
-                expression { params.DEPLOY_TARGET == 'staging' }
-            }
-            steps {
-                echo "Deploying to the staging environment (${params.DEPLOY_TARGET})"
-                // Add your staging deployment steps here
+        if (params.DEPLOY_TARGET == 'staging') {
+            stage('Deploy to Staging') {
+                when {
+                    expression { params.DEPLOY_TARGET == 'staging' }
+                }
+                steps {
+                    echo "Deploying to the staging environment (${params.DEPLOY_TARGET})"
+                    // Add your staging deployment steps here
+                }
             }
         }
 
